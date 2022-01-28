@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <span> total clicks : 0</span>
+        <button id = "btn+"> click me + </button>
+        <button id = "btn-"> click me - </button>
+
+    </body>
+    <script>
+        let counter = 0;
+
+        const buttonplus = document.getElementById("btn+");
+        const buttonminus = document.getElementById("btn-");
+        const span = document.querySelector("span")
+
+        function handleclickplus() {
+            counter = counter +1;
+            span.innerText = `total clicks : ${counter}`
+        }
+
+        function handleclickminus() {
+            counter = counter - 1;
+            span.innerText = `total clicks : ${counter}`
+        }
+
+
+        buttonplus.addEventListener("click", handleclickplus);
+        buttonminus.addEventListener("click", handleclickminus);
+    </script>
+</html>
