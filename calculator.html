@@ -11,30 +11,86 @@
 
     <script type ="text/babel">
         const root = document.getElementById("root")
-        
-        function App() {
+        function Timeconvert() {
             
-            const [number, counter] = React.useState(0)
-            const [mouseposition, setmouse] = React.useState(false)
-            const countup  = ()=> counter (number + 1)
-            const countdown = ()=> counter (number - 1)
-            const mouseon = () => setmouse(true)
-            const mouseout = () => setmouse(false)
+            const [amout, setamout] = React.useState()
+            const [fliped, setfilp] = React.useState(true)
 
+            const onChange = (e) => setamout(e.target.value);
+            const resetbutton = () => {
+                setamout(0)
+            }
+
+            const filp = () =>{
+                setfilp((now) => !now)
+                resetbutton()
+            }
 
             return (
             <div>
-                    <h1 onMouseOut = {mouseout} > Calculator </h1>
-                    <label> Minutes </label>
-                    <input placeholder = 'minutes' type ="number" /> 
-                    <label> Hours </label>
-                    <input placeholder = 'hours' type = "number" /> 
-                
-    
+                    <label htmlFor = "miuntes"> Minutes </label>
+                    <input value = {fliped ? amout : amout * 60} id = "minutes" placeholder='minutes' type ="number" onChange={onChange} disabled={!fliped} /> 
+                    <h3></h3>
+                    <label htmlFor = "hours"> Hours </label>
+                    <input value = {fliped ? amout/60 : amout} id = "hours" placeholder = 'hours' type = "number" onChange={onChange} disabled={fliped}/> 
+                    <h3></h3>
+                    <button onClick = {resetbutton}> Reset </button>
+                    <button onClick = {filp}> flip </button>
             </div>
             )
         }
 
+        function Kiloconvert() {
+            
+            const [amout2, setamout2] = React.useState()
+            const [fliped, setfilp] = React.useState(true)
+
+            const onChange2 = (e) => setamout2(e.target.value);
+            const resetbutton = () => {
+                setamout2(0)
+            }
+
+            const filp = () =>{
+                setfilp((now) => !now)
+                resetbutton()
+            }
+
+            return (
+            <div>
+                    <label htmlFor = "meter"> Meter </label>
+                    <input value = {fliped ? amout2 : amout2 * 1000} id = "meter" placeholder='meter' type ="number" onChange={onChange2} disabled={!fliped} /> 
+                    <h3></h3>
+                    <label htmlFor = "kilometer"> Kilometer </label>
+                    <input value = {fliped ? amout2/1000 : amout2} id = "kilometer" placeholder = 'kilometer' type = "number" onChange={onChange2} disabled={fliped}/> 
+                    <h3></h3>
+                    <button onClick = {resetbutton}> Reset </button>
+                    <button onClick = {filp}> flip </button>
+            </div>
+            )
+        }
+
+
+        function App() {
+            const [selected, setselect] = React.useState()
+
+            const doselect = (e) =>{
+                setselect(e.target.value)
+            }
+
+            return (
+                <div>
+                <h1>Convertor</h1>
+                <select value = {selected} onChange = {doselect}>
+                    <option value = "0" > Minutes & Hours </option>
+                    <option value = "1" > Meter & Kilo </option>
+                </select>
+                <hr/>
+                {selected === "0" ?  < Timeconvert /> : null}
+                {selected === "1" ?  < Kiloconvert /> : null}
+
+                </div>
+            )
+        }
         ReactDOM.render(<App />, root);
     </script>
 </html>
