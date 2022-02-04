@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 
-
-
 function App() {
   const [loading, setloding] = useState(true);
   const [coins, setcoins] = useState([])
